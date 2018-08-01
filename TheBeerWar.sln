@@ -7,13 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheBeerWar", "TheBeerWar\Th
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTest", "TestTest\TestTest.csproj", "{D9477094-577C-4637-B0F4-3BB9E39A5587}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerService.Models", "Beer.Models\BeerService.Models.csproj", "{D3EB728E-7B74-4C41-B1AF-C1758F126787}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerService.Infrastructure", "BeerService.Infrastructure\BeerService.Infrastructure.csproj", "{686F66A8-DD9C-435B-BBE7-37501D366061}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BeerService", "BeerService", "{E89D183A-24DB-41F6-8BA7-2A7C41F67411}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{179D4309-1593-4E04-A586-1DED785D8F37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerService.Model", "BeerService.Model\BeerService.Model.csproj", "{A3A87133-E5F5-474B-ADA4-F5D190FE15A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,22 +29,22 @@ Global
 		{D9477094-577C-4637-B0F4-3BB9E39A5587}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9477094-577C-4637-B0F4-3BB9E39A5587}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9477094-577C-4637-B0F4-3BB9E39A5587}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3EB728E-7B74-4C41-B1AF-C1758F126787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3EB728E-7B74-4C41-B1AF-C1758F126787}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3EB728E-7B74-4C41-B1AF-C1758F126787}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3EB728E-7B74-4C41-B1AF-C1758F126787}.Release|Any CPU.Build.0 = Release|Any CPU
 		{686F66A8-DD9C-435B-BBE7-37501D366061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{686F66A8-DD9C-435B-BBE7-37501D366061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{686F66A8-DD9C-435B-BBE7-37501D366061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{686F66A8-DD9C-435B-BBE7-37501D366061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3A87133-E5F5-474B-ADA4-F5D190FE15A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3A87133-E5F5-474B-ADA4-F5D190FE15A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3A87133-E5F5-474B-ADA4-F5D190FE15A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3A87133-E5F5-474B-ADA4-F5D190FE15A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D9477094-577C-4637-B0F4-3BB9E39A5587} = {179D4309-1593-4E04-A586-1DED785D8F37}
-		{D3EB728E-7B74-4C41-B1AF-C1758F126787} = {E89D183A-24DB-41F6-8BA7-2A7C41F67411}
 		{686F66A8-DD9C-435B-BBE7-37501D366061} = {E89D183A-24DB-41F6-8BA7-2A7C41F67411}
+		{A3A87133-E5F5-474B-ADA4-F5D190FE15A7} = {E89D183A-24DB-41F6-8BA7-2A7C41F67411}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42F5B21C-FA3E-49FA-A325-2FAF806F2916}
