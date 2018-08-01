@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TheBeerWar.Models.BeerModels
+namespace BeerService.Models
 {
-    public interface IDalBeer : IDisposable
+    public interface IBeerRepository : IDisposable
     {
         void CreateBeerUser(int clientId, GamerType gamerType, string pseudo);
         BeerUser GetBeerUserById(int beerUserId);
@@ -13,11 +14,11 @@ namespace TheBeerWar.Models.BeerModels
         List<BeerUser> GetAllBeerUsers();
         BeerUser UpdateBeerUser(BeerUser beerUser);
         void DeleteBeerUser(BeerUser beerUser);
-        
+
         GamerType GetGamerTypeById(int gamerTypeId);
         GamerType GetGamerTypeByName(string gamerTypeName);
         List<GamerType> GetAllGamerTypes();
-        
+
         /// <summary>
         /// Return all weapons of one user.
         /// </summary>

@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BeerContex.cs" />
+    <Compile Include="DalBeer.cs" />
+    <Compile Include="IDalBeer.cs" />
     <Compile Include="Migrations\201807291420392_InitialCreate.cs" />
     <Compile Include="Migrations\201807291420392_InitialCreate.Designer.cs">
       <DependentUpon>201807291420392_InitialCreate.cs</DependentUpon>
@@ -73,6 +82,16 @@
     <EmbeddedResource Include="Migrations\201808011006172_CorrectionUpdate1.resx">
       <DependentUpon>201808011006172_CorrectionUpdate1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BeerService.Model\BeerService.Model.csproj">
+      <Project>{a3a87133-e5f5-474b-ada4-f5d190fe15a7}</Project>
+      <Name>BeerService.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

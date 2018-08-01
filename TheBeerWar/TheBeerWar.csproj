@@ -195,38 +195,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BeerAccountController.cs" />
+    <Compile Include="Controllers\BeerWarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Exceptions\BeerWarException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807291420392_InitialCreate.cs" />
-    <Compile Include="Migrations\201807291420392_InitialCreate.Designer.cs">
-      <DependentUpon>201807291420392_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807291434579_Update1.cs" />
-    <Compile Include="Migrations\201807291434579_Update1.Designer.cs">
-      <DependentUpon>201807291434579_Update1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807291808309_Update2.cs" />
-    <Compile Include="Migrations\201807291808309_Update2.Designer.cs">
-      <DependentUpon>201807291808309_Update2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808011006172_CorrectionUpdate1.cs" />
-    <Compile Include="Migrations\201808011006172_CorrectionUpdate1.Designer.cs">
-      <DependentUpon>201808011006172_CorrectionUpdate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BeerModels\BeerDBContex.cs" />
-    <Compile Include="Models\BeerModels\BeerUser.cs" />
-    <Compile Include="Models\BeerModels\DalBeer.cs" />
-    <Compile Include="Models\BeerModels\GamerType.cs" />
-    <Compile Include="Models\BeerModels\IDalBeer.cs" />
-    <Compile Include="Models\BeerModels\UserWeapon.cs" />
-    <Compile Include="Models\BeerModels\Weapon.cs" />
-    <Compile Include="Models\BeerModels\WeaponType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -295,6 +271,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\BeerAccount\" />
+    <Folder Include="Views\BeerWar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -310,18 +288,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807291420392_InitialCreate.resx">
-      <DependentUpon>201807291420392_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807291434579_Update1.resx">
-      <DependentUpon>201807291434579_Update1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807291808309_Update2.resx">
-      <DependentUpon>201807291808309_Update2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808011006172_CorrectionUpdate1.resx">
-      <DependentUpon>201808011006172_CorrectionUpdate1.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\BeerService.Service\BeerService.Service.csproj">
+      <Project>{3D7B5A2A-1F68-4C77-8860-69180CE59D87}</Project>
+      <Name>BeerService.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

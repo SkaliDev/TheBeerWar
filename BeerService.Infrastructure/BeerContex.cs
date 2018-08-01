@@ -1,14 +1,15 @@
-﻿using System;
+﻿using BeerService.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace TheBeerWar.Models.BeerModels
+namespace BeerService.Infrastructure
 {
-    public class BeerDBContex : DbContext
+    public class BeerContex : DbContext
     {
-        public BeerDBContex() : base("BeerDBContex")
+        public BeerContex() : base("BeerDBContex")
         {
         }
 

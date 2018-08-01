@@ -1,4 +1,4 @@
-namespace TheBeerWar.Migrations
+namespace BeerService.Infrastructure.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

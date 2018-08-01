@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheBeerWar.Models.BeerModels;
+using BeerService.Infrastructure;
+using BeerService.Models;
 
 namespace TestTest
 {

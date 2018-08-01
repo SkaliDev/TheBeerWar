@@ -64,6 +64,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeerService.Infrastructure\BeerService.Infrastructure.csproj">
+      <Project>{686F66A8-DD9C-435B-BBE7-37501D366061}</Project>
+      <Name>BeerService.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeerService.Model\BeerService.Model.csproj">
+      <Project>{A3A87133-E5F5-474B-ADA4-F5D190FE15A7}</Project>
+      <Name>BeerService.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TheBeerWar\TheBeerWar.csproj">
       <Project>{17C1BB24-97B3-4320-A260-027BF2EFFEC8}</Project>
       <Name>TheBeerWar</Name>

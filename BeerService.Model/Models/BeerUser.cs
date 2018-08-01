@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using TheBeerWar.Exceptions;
+using BeerService.Exceptions;
 
-namespace TheBeerWar.Models.BeerModels
+namespace BeerService.Models
 {
     public class BeerUser
     {
@@ -32,7 +32,7 @@ namespace TheBeerWar.Models.BeerModels
             }
             else
             {
-                throw new BeerWarException("Too much characters in the string '" + variableName + "'. Maximum " + max.ToString() + " characters.");
+                throw new BeerException("Too much characters in the string '" + variableName + "'. Maximum " + max.ToString() + " characters.");
             }
         }
     }

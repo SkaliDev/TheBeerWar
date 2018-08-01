@@ -1,27 +1,28 @@
-﻿using System;
+﻿using BeerService.Models;
+using BeerService.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using TheBeerWar.Exceptions;
 
-namespace TheBeerWar.Models.BeerModels
+namespace BeerService.Infrastructure
 {
     public class DalBeer : IDalBeer
     {
-        private BeerDBContex _context;
+        private BeerContex _context;
     
         public DalBeer()
         {
-            _context = new BeerDBContex();
+            _context = new BeerContex();
         }
 
         //BeerUsers
         public void CreateBeerUser(int clientId, GamerType gamerType, string pseudonym)
         {
             if (GetGamerTypeById(gamerType.Id) == null)
-                throw new BeerWarException("The gamer type doesn't exist.");
+                throw new BeerException("The gamer type doesn't exist.");
             if (GetBeerUserByPseudonym(pseudonym) == null)
-                throw new BeerWarException("The pseudonym " + pseudonym + " is not avaible.");
+                throw new BeerException("The pseudonym " + pseudonym + " is not avaible.");
             var beerUser = new BeerUser();
             beerUser.ClientId = clientId;
             beerUser.GamerType = gamerType;

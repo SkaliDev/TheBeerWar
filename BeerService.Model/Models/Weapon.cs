@@ -4,20 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace TheBeerWar.Models.BeerModels
+namespace BeerService.Models
 {
-    public class GamerType
+    public class Weapon
     {
         [Key]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
-        public int Attack { get; set; }
+        public int MinimumLevel { get; set; }
         [Required]
-        public int Defense { get; set; }
+        public int Cost { get; set; }
         [Required]
-        public int Life { get; set; }
+        public int AttackMore { get; set; }
         public virtual WeaponType WeaponType { get; set; }
     }
 }
