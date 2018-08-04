@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace TheBeerWar.Controllers
 {
+    [Authorize]
     public class BeerWarController : Controller
     {
         // GET: BeerWar

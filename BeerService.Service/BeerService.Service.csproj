@@ -48,6 +48,10 @@
       <Project>{686F66A8-DD9C-435B-BBE7-37501D366061}</Project>
       <Name>BeerService.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BeerService.Model\BeerService.Model.csproj">
+      <Project>{A3A87133-E5F5-474B-ADA4-F5D190FE15A7}</Project>
+      <Name>BeerService.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

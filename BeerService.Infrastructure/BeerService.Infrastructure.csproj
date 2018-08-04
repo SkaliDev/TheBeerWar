@@ -50,38 +50,12 @@
     <Compile Include="BeerContex.cs" />
     <Compile Include="DalBeer.cs" />
     <Compile Include="IDalBeer.cs" />
-    <Compile Include="Migrations\201807291420392_InitialCreate.cs" />
-    <Compile Include="Migrations\201807291420392_InitialCreate.Designer.cs">
-      <DependentUpon>201807291420392_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807291434579_Update1.cs" />
-    <Compile Include="Migrations\201807291434579_Update1.Designer.cs">
-      <DependentUpon>201807291434579_Update1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807291808309_Update2.cs" />
-    <Compile Include="Migrations\201807291808309_Update2.Designer.cs">
-      <DependentUpon>201807291808309_Update2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808011006172_CorrectionUpdate1.cs" />
-    <Compile Include="Migrations\201808011006172_CorrectionUpdate1.Designer.cs">
-      <DependentUpon>201808011006172_CorrectionUpdate1.cs</DependentUpon>
+    <Compile Include="Migrations\201808031031047_InitialCreate.cs" />
+    <Compile Include="Migrations\201808031031047_InitialCreate.Designer.cs">
+      <DependentUpon>201808031031047_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807291420392_InitialCreate.resx">
-      <DependentUpon>201807291420392_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807291434579_Update1.resx">
-      <DependentUpon>201807291434579_Update1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807291808309_Update2.resx">
-      <DependentUpon>201807291808309_Update2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808011006172_CorrectionUpdate1.resx">
-      <DependentUpon>201808011006172_CorrectionUpdate1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -92,6 +66,11 @@
       <Project>{a3a87133-e5f5-474b-ada4-f5d190fe15a7}</Project>
       <Name>BeerService.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808031031047_InitialCreate.resx">
+      <DependentUpon>201808031031047_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

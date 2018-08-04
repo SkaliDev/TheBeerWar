@@ -17,11 +17,11 @@ namespace BeerService.Infrastructure
         }
 
         //BeerUsers
-        public void CreateBeerUser(int clientId, GamerType gamerType, string pseudonym)
+        public void CreateBeerUser(string clientId, GamerType gamerType, string pseudonym)
         {
             if (GetGamerTypeById(gamerType.Id) == null)
                 throw new BeerException("The gamer type doesn't exist.");
-            if (GetBeerUserByPseudonym(pseudonym) == null)
+            if (GetBeerUserByPseudonym(pseudonym) != null)
                 throw new BeerException("The pseudonym " + pseudonym + " is not avaible.");
             var beerUser = new BeerUser();
             beerUser.ClientId = clientId;
@@ -40,6 +40,10 @@ namespace BeerService.Infrastructure
         public BeerUser GetBeerUserByPseudonym(string pseudonym)
         {
             return _context.BeerUsers.FirstOrDefault(u => u.Pseudonym == pseudonym);
+        }
+        public BeerUser GetBeerUserByClientId(string clientId)
+        {
+            return _context.BeerUsers.FirstOrDefault(u => u.ClientId == clientId);
         }
         public List<BeerUser> GetAllBeerUsers()
         {
@@ -72,6 +76,10 @@ namespace BeerService.Infrastructure
         public List<GamerType> GetAllGamerTypes()
         {
             return _context.GamerTypes.ToList();
+        }
+        public List<string> GetAllGamerTypeNames()
+        {
+            return _context.GamerTypes.Select(g => g.Name).ToList();
         }
 
         //

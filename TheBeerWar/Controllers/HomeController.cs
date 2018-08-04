@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNet.Identity.Owin;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,23 +6,25 @@ namespace TheBeerWar.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private ApplicationUserManager _userManager;
+        private ApplicationUserManager UserManager
         {
-            return View();
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            set
+            {
+                _userManager = value;
+            }
         }
 
-        //public ActionResult About()
-        //{
-        //    ViewBag.Message = "Your application description page.";
-
-        //    return View();
-        //}
-
-        //public ActionResult Contact()
-        //{
-        //    ViewBag.Message = "Your contact page.";
-
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+            if (HttpContext.User.IsInRole("Gamer"))
+                return RedirectToAction("Index", "Desktop");
+            else
+                return RedirectToAction("CreateUser", "BeerAccount");
+        }
     }
 }

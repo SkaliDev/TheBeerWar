@@ -12,7 +12,7 @@ namespace BeerService.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public virtual GamerType GamerType { get; set; }
         [Required]
         public int Level { get; set; }

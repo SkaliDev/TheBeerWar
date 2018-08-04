@@ -1,4 +1,5 @@
 ﻿using BeerService.Infrastructure;
+using BeerService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,37 @@ namespace BeerService.Service
 {
     public class BeerService
     {
-        private readonly BeerContex _context;
+        private readonly DalBeer _context;
 
-        public BeerService(BeerContex contex)
+        public BeerService()
         {
-            _context = contex;
+            _context = new DalBeer();
+        }
+
+        public void CreateBeerUser(string clientId, GamerType gamerType, string pseudonym)
+        {
+            _context.CreateBeerUser(clientId, gamerType, pseudonym);
+        }
+        public BeerUser GetUserById(int id)
+        {
+            return _context.GetBeerUserById(id);
+        }
+        public BeerUser GetBeerUserByClientId(string clientId)
+        {
+            return _context.GetBeerUserByClientId(clientId);
+        }
+
+        public GamerType GetGamerTypeByName(string gamerTypeName)
+        {
+            return _context.GetGamerTypeByName(gamerTypeName);
+        }
+        public List<GamerType> GetAllGamerTypes()
+        {
+            return _context.GetAllGamerTypes();
+        }
+        public List<string> GetAllGamerTypeNames()
+        {
+            return _context.GetAllGamerTypeNames();
         }
     }
 }

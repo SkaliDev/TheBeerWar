@@ -12,11 +12,11 @@ namespace BeerService.Infrastructure.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ClientId = c.Int(nullable: false),
+                        ClientId = c.String(nullable: false),
                         Level = c.Int(nullable: false),
                         Experience = c.Int(nullable: false),
                         Money = c.Int(nullable: false),
-                        Pseudonym = c.String(),
+                        Pseudonym = c.String(nullable: false),
                         GamerType_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -52,12 +52,13 @@ namespace BeerService.Infrastructure.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        User_Id = c.Int(nullable: false),
-                        Weapon_Id = c.Int(nullable: false),
+                        InUse = c.Boolean(nullable: false),
+                        User_Id = c.Int(),
+                        Weapon_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.UserWeapons", t => t.User_Id)
-                .ForeignKey("dbo.Weapons", t => t.Weapon_Id, cascadeDelete: true)
+                .ForeignKey("dbo.BeerUsers", t => t.User_Id)
+                .ForeignKey("dbo.Weapons", t => t.Weapon_Id)
                 .Index(t => t.User_Id)
                 .Index(t => t.Weapon_Id);
             
@@ -66,6 +67,7 @@ namespace BeerService.Infrastructure.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
                         MinimumLevel = c.Int(nullable: false),
                         Cost = c.Int(nullable: false),
                         AttackMore = c.Int(nullable: false),
@@ -81,7 +83,7 @@ namespace BeerService.Infrastructure.Migrations
         {
             DropForeignKey("dbo.UserWeapons", "Weapon_Id", "dbo.Weapons");
             DropForeignKey("dbo.Weapons", "WeaponType_Id", "dbo.WeaponTypes");
-            DropForeignKey("dbo.UserWeapons", "User_Id", "dbo.UserWeapons");
+            DropForeignKey("dbo.UserWeapons", "User_Id", "dbo.BeerUsers");
             DropForeignKey("dbo.BeerUsers", "GamerType_Id", "dbo.GamerTypes");
             DropForeignKey("dbo.GamerTypes", "WeaponType_Id", "dbo.WeaponTypes");
             DropIndex("dbo.Weapons", new[] { "WeaponType_Id" });

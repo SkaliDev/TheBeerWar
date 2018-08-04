@@ -8,7 +8,7 @@ namespace BeerService.Infrastructure
 {
     public interface IDalBeer : IDisposable
     {
-        void CreateBeerUser(int clientId, GamerType gamerType, string pseudo);
+        void CreateBeerUser(string clientId, GamerType gamerType, string pseudo);
         BeerUser GetBeerUserById(int beerUserId);
         BeerUser GetBeerUserByPseudonym(string pseudo);
         List<BeerUser> GetAllBeerUsers();
@@ -18,7 +18,8 @@ namespace BeerService.Infrastructure
         GamerType GetGamerTypeById(int gamerTypeId);
         GamerType GetGamerTypeByName(string gamerTypeName);
         List<GamerType> GetAllGamerTypes();
-        
+        List<string> GetAllGamerTypeNames();
+
         /// <summary>
         /// Return all weapons of one user.
         /// </summary>

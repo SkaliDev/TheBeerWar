@@ -24,8 +24,8 @@ namespace TestTest
                 if (beerUser != null)
                     dal.DeleteBeerUser(beerUser);
 
-                dal.CreateBeerUser(0, dal.GetGamerTypeByName("Archer"), "TheFirstUser");
-                dal.CreateBeerUser(0, dal.GetGamerTypeByName("Sorcier"), "TheSeconfUser");
+                dal.CreateBeerUser("0", dal.GetGamerTypeByName("Archer"), "TheFirstUser");
+                dal.CreateBeerUser("0", dal.GetGamerTypeByName("Sorcier"), "TheSeconfUser");
 
                 List<BeerUser> users = dal.GetAllBeerUsers();
 
