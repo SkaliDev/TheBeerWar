@@ -1,5 +1,5 @@
 ﻿using BeerService.Model.ViewModels;
-using BeerService.Models;
+using BeerService.Model.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
@@ -24,11 +24,6 @@ namespace TheBeerWar.Controllers
                 _userManager = value;
             }
         }
-
-        public BeerAccountController()
-        {
-        }
-       
 
         [HttpGet]
         public ActionResult CreateUser()

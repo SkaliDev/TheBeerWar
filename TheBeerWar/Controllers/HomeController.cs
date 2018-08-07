@@ -22,7 +22,7 @@ namespace TheBeerWar.Controllers
         public ActionResult Index()
         {
             if (HttpContext.User.IsInRole("Gamer"))
-                return RedirectToAction("Index", "Desktop");
+                return RedirectToAction("Index", "Dashboard");
             else
                 return RedirectToAction("CreateUser", "BeerAccount");
         }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BeerService.Models
+namespace BeerService.Model.Models
 {
     public class UserWeapon
     {
@@ -14,5 +14,15 @@ namespace BeerService.Models
         public virtual Weapon Weapon { get; set; }
         [Required]
         public bool InUse { get; set; }
+
+        public UserWeapon()
+        {
+        }
+        public UserWeapon(BeerUser beerUser, Weapon weapon, bool inUse)
+        {
+            User = beerUser;
+            Weapon = weapon;
+            InUse = inUse;
+        }
     }
 }

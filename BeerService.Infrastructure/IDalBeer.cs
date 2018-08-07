@@ -1,4 +1,4 @@
-﻿using BeerService.Models;
+﻿using BeerService.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +11,9 @@ namespace BeerService.Infrastructure
         void CreateBeerUser(string clientId, GamerType gamerType, string pseudo);
         BeerUser GetBeerUserById(int beerUserId);
         BeerUser GetBeerUserByPseudonym(string pseudo);
+        BeerUser GetBeerUserByClientId(string clientId);
         List<BeerUser> GetAllBeerUsers();
-        BeerUser UpdateBeerUser(BeerUser beerUser);
+        void UpdateBeerUser(BeerUser beerUser);
         void DeleteBeerUser(BeerUser beerUser);
         
         GamerType GetGamerTypeById(int gamerTypeId);
@@ -20,10 +21,23 @@ namespace BeerService.Infrastructure
         List<GamerType> GetAllGamerTypes();
         List<string> GetAllGamerTypeNames();
 
+        Weapon GetWeaponById(int weaponId);
+        Weapon GetWeaponByAttackMore(WeaponType weaponType, int attackMore);
+        List<Weapon> GetWeaponsByWeaponType(WeaponType weaponType);
+
+        void AddUserWeapon(UserWeapon userWeapon);
+        UserWeapon GetUserWeaponById(int userWeaponId);
         /// <summary>
-        /// Return all weapons of one user.
+        /// Return all UserWeapon of the BeerUser passed in parameter.
         /// </summary>
+        /// <param name="beerUser"></param>
         /// <returns></returns>
-        List<UserWeapon> GetAllUserWeapons();
+        List<UserWeapon> GetUserWeapons(BeerUser beerUser);
+        UserWeapon GetUserWeaponInUse(BeerUser beerUser);
+        /// <summary>
+        /// Check all UserWeapons of the user to put the InUse at false before putting the UserWeapon selected at true.
+        /// </summary>
+        /// <param name="userWeapon"></param>
+        void UpdateUserWeaponInUse(UserWeapon userWeapon);
     }
 }

@@ -1,9 +1,10 @@
-﻿using BeerService.Models;
+﻿using BeerService.Model.Models;
 using BeerService.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 
 namespace BeerService.Infrastructure
 {
@@ -31,7 +32,8 @@ namespace BeerService.Infrastructure
             beerUser.Experience = 0;
             beerUser.Money = 50;
             _context.BeerUsers.Add(beerUser);
-            _context.SaveChanges();
+            if (_context.SaveChanges() == 0)
+                throw new BeerException("An error occured when creating BeerUser.");
         }
         public BeerUser GetBeerUserById(int beerUserId)
         {
@@ -49,19 +51,18 @@ namespace BeerService.Infrastructure
         {
             return _context.BeerUsers.ToList();
         }
-        public BeerUser UpdateBeerUser(BeerUser beerUser)
+        public void UpdateBeerUser(BeerUser beerUser)
         {
             var user = _context.BeerUsers.FirstOrDefault(u => u.Id == beerUser.Id);
             user = beerUser;
-            if (_context.SaveChanges() > 0)
-                return user;
-            else
-                return null;
+            if (_context.SaveChanges() == 0)
+                throw new BeerException("An error occured when updating BeerUser.");
         }
         public void DeleteBeerUser(BeerUser beerUser)
         {
             _context.BeerUsers.Remove(beerUser);
-            _context.SaveChanges();
+            if (_context.SaveChanges() == 0)
+                throw new BeerException("An error occured when deleting BeerUser.");
         }
 
         //GamerType
@@ -81,13 +82,51 @@ namespace BeerService.Infrastructure
         {
             return _context.GamerTypes.Select(g => g.Name).ToList();
         }
-
-        //
+        
+        //Weapons
+        public Weapon GetWeaponById(int weaponId)
+        {
+            return _context.Weapons.FirstOrDefault(w => w.Id == weaponId);
+        }
+        public Weapon GetWeaponByAttackMore(WeaponType weaponType, int attackMore)
+        {
+            return _context.Weapons.FirstOrDefault(w => w.AttackMore == attackMore && w.WeaponType.Id == weaponType.Id);
+        }
+        public List<Weapon> GetWeaponsByWeaponType(WeaponType weaponType)
+        {
+            return _context.Weapons.Where(w => w.WeaponType.Id == weaponType.Id).ToList();
+        }
 
         //UserWeapons
-        public List<UserWeapon> GetAllUserWeapons()
+        public void AddUserWeapon(UserWeapon userWeapon)
         {
-            return _context.UserWeapons.ToList();
+            _context.UserWeapons.Add(userWeapon);
+            if (_context.SaveChanges() == 0)
+                throw new BeerException("An error occured when adding UserWeapon.");
+        }
+        public UserWeapon GetUserWeaponById(int userWeaponId)
+        {
+            return _context.UserWeapons.FirstOrDefault(w => w.Id == userWeaponId);
+        }
+        public List<UserWeapon> GetUserWeapons(BeerUser beerUser)
+        {
+            return _context.UserWeapons.Where(w => w.User.Id == beerUser.Id).ToList();
+        }
+        public UserWeapon GetUserWeaponInUse(BeerUser beerUser)
+        {
+            return _context.UserWeapons.FirstOrDefault(w => w.User.Id == beerUser.Id && w.InUse == true);
+        }
+        public void UpdateUserWeaponInUse(UserWeapon userWeapon)
+        {
+            var weapons = _context.UserWeapons.Where(w => w.User == userWeapon.User && w.InUse == true);
+            foreach (UserWeapon w in weapons)
+            {
+                w.InUse = false;
+            }
+            userWeapon.InUse = true;
+            var weapon = _context.UserWeapons.Where(w => w == userWeapon);
+            if (_context.SaveChanges() == 0)
+                throw new BeerException("An error occured when updating UserWeapon in use.");
         }
 
         public void Dispose()

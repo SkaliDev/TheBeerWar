@@ -1,0 +1,41 @@
+﻿@model BeerService.Model.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5" style="border-style: solid;">
+            <p>@Model.beerUser.Pseudonym</p>
+            <p>Level : @Model.beerUser.Level</p>
+            <p>Experience : @Model.beerUser.Experience / @Model.userCharacteristics.MaxExperience</p>
+            <p>Money : @Model.beerUser.Money</p>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-5" style="border-style: solid;">
+            <p>Attack : @Model.userCharacteristics.Attack</p>
+            <p>Defense : @Model.userCharacteristics.Defense</p>
+            <p>Life : @Model.userCharacteristics.Life</p>
+            <p>Weapon in use : @Model.userWeaponInUse.Weapon.Name</p>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-5">
+            <table>
+                @foreach (var w in Model.userWeapons)
+                {
+                    <tr style="border-style:solid;">
+                        <td>@w.Weapon.Name</td>
+                        <td>@w.Weapon.AttackMore</td>
+                        <td>@Html.CheckBox(w.Weapon.Name, w.InUse)</td>
+                        <td><button onclick="location.href='@Url.Action("SelectWeapon", "Dashboard" )?id=@w.Weapon.Id'">Buy it</button></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

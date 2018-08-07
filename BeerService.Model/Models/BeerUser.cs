@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using BeerService.Exceptions;
 
-namespace BeerService.Models
+namespace BeerService.Model.Models
 {
     public class BeerUser
     {
@@ -23,6 +23,10 @@ namespace BeerService.Models
         private string _pseudonym;
         [Required]
         public string Pseudonym { get { return _pseudonym; } set { _pseudonym = StringLengthSmalerOrEqual(value, 20, "Pseudonym"); } }
+
+        public BeerUser()
+        {
+        }
 
         private string StringLengthSmalerOrEqual(string str, int max, string variableName)
         {

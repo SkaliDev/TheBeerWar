@@ -1,0 +1,53 @@
+﻿@model BeerService.Model.ViewModels.ShopViewModel
+@{
+    ViewBag.Title = "Shop";
+}
+
+<h2>Shop</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="border-style:solid; padding:5px;">
+            <p>@Model.beerUser.Pseudonym</p>
+            <p>Level : @Model.beerUser.Level</p>
+            <p>Money : @Model.beerUser.Money</p>
+        </div>
+    </div>
+    <hr />
+    <p style="color:green;">@Model.SuccessMessage</p>
+    <p style="color:red;">@Model.ErrorMessage</p>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            @foreach (var w in Model.WeaponsToBuy)
+            {
+                <br />
+                <div class="row">
+                    <div class="col-md-4" style="border-style:solid; padding:10px;">
+                        <p>@w.Name</p>
+                        <p>Minimum level : @w.MinimumLevel</p>
+                        <p>Attack more : @w.AttackMore</p>
+                        <p>Cost : @w.Cost</p>
+                        <button onclick="location.href='@Url.Action("BuyWeapon", "Shop" )?id=@w.Id'">Buy it</button>
+                    </div>
+                </div>
+                <br />
+            }
+        </div>
+        <div class="col-md-6">
+            @foreach (var w in Model.UserWeapons)
+            {
+                <br />
+                <div class="row">
+                    <div class="col-md-4" style="border-style:solid; padding:10px;">
+                        <p>@w.Name</p>
+                        <p>Minimum level : @w.MinimumLevel</p>
+                        <p>Attack more : @w.AttackMore</p>
+                        <p>Bought</p>
+                    </div>
+                </div>
+                <br />
+            }
+        </div>
+    </div>
+</div>

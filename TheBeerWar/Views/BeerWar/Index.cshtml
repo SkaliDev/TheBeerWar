@@ -1,0 +1,25 @@
+﻿@model BeerService.Model.ViewModels.BeerWarViewModel
+@{
+    ViewBag.Title = "Beer War";
+}
+
+<h2>Beer War</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="border-style:solid;">
+            <p>@Model.beerUser.Pseudonym</p>
+            <p>Level : @Model.beerUser.Level</p>
+            <p>Experience : @Model.beerUser.Experience / @Model.userCharacteristics.MaxExperience</p>
+            <p>Money : @Model.beerUser.Money</p>
+            <hr />
+            <p>Attack : @Model.userCharacteristics.Attack</p>
+            <p>Defense : @Model.userCharacteristics.Defense</p>
+            <p>Life : @Model.userCharacteristics.Life</p>
+            <p>Weapon in use : @Model.userWeaponInUse.Weapon.Name</p>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+</div>
