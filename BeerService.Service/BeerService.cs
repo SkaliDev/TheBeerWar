@@ -1,6 +1,5 @@
 ﻿using BeerService.Exceptions;
 using BeerService.Infrastructure;
-using BeerService.Model.CalculationModels;
 using BeerService.Model.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BeerService.Service
 {
-    public class BeerService
+    public class BeerService : IBeerService
     {
         private readonly IDalBeer _context;
 
@@ -24,7 +23,7 @@ namespace BeerService.Service
             _context.CreateBeerUser(clientId, gamerType, pseudonym);
             var beerUser = _context.GetBeerUserByClientId(clientId);
             var weapon = _context.GetWeaponByAttackMore(gamerType.WeaponType, 2);
-            UserWeapon userWeapon = new UserWeapon(beerUser, weapon, true);
+            _context.AddUserWeapon(new UserWeapon(beerUser, weapon, true));
         }
         public BeerUser GetUserById(int id)
         {
@@ -38,9 +37,24 @@ namespace BeerService.Service
         {
             return _context.GetAllBeerUsers();
         }
-        public void UpdateBeerUser(BeerUser beerUser)
+        public void UpdateBeerUserInformations(BeerUser beerUser)
         {
             _context.UpdateBeerUser(beerUser);
+        }
+        public void UpdateBeerUserCharacteristics(BeerUser beerUser, Weapon weapon)
+        {
+            BeerCalculationService.CharacteristicsCalculation(beerUser, weapon);
+            _context.UpdateBeerUser(beerUser);
+        }
+        public void UpdateBeerUserAddExperience(BeerUser beerUser, Weapon weapon, int experience)
+        {
+            BeerCalculationService.AddExperience(beerUser, weapon, experience);
+            _context.UpdateBeerUser(beerUser);
+        }
+        public List<BeerUser> RemoveBeerUserFromBeerUsersList(BeerUser beerUser, List<BeerUser> beerUsers)
+        {
+            beerUsers.RemoveAll(u => u.Id == beerUser.Id);
+            return beerUsers;
         }
 
         public GamerType GetGamerTypeByName(string gamerTypeName)
@@ -91,7 +105,7 @@ namespace BeerService.Service
                 throw new BeerException("You doesn't have enought money !");
             AddUserWeapon(new UserWeapon(beerUser, weapon, false));
             beerUser.Money -= weapon.Cost;
-            UpdateBeerUser(beerUser);
+            UpdateBeerUserInformations(beerUser);
         }
         public List<UserWeapon> GetUserWeapons(BeerUser beerUser)
         {
@@ -138,24 +152,6 @@ namespace BeerService.Service
             if (userWeapon == null)
                 throw new BeerException("Can't find the weapon !");
             UpdateUserWeaponInUse(userWeapon);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="beerUser"></param>
-        /// <param name="weapon">The weapon of the user.</param>
-        /// <returns></returns>
-        public UserCharacteristics UserCharacteristicsCalculation(BeerUser beerUser, Weapon weapon)
-        {
-            UserCharacteristics userCharacteristics = new UserCharacteristics();
-
-            userCharacteristics.Attack = (int)(beerUser.GamerType.Attack + (beerUser.GamerType.Attack / 11) + weapon.AttackMore);
-            userCharacteristics.Defense = (int)(beerUser.GamerType.Defense + (beerUser.GamerType.Defense / 9.60));
-            userCharacteristics.Life = (int)(beerUser.GamerType.Defense + (beerUser.GamerType.Defense / 10));
-            userCharacteristics.MaxExperience = (int)(beerUser.Level * 10.6);
-
-            return userCharacteristics;
         }
     }
 }

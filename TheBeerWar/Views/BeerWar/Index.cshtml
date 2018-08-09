@@ -10,16 +10,40 @@
         <div class="col-md-4" style="border-style:solid;">
             <p>@Model.beerUser.Pseudonym</p>
             <p>Level : @Model.beerUser.Level</p>
-            <p>Experience : @Model.beerUser.Experience / @Model.userCharacteristics.MaxExperience</p>
+            <p>Experience : @Model.beerUser.Experience / @Model.beerUser.MaxExperience</p>
             <p>Money : @Model.beerUser.Money</p>
             <hr />
-            <p>Attack : @Model.userCharacteristics.Attack</p>
-            <p>Defense : @Model.userCharacteristics.Defense</p>
-            <p>Life : @Model.userCharacteristics.Life</p>
+            <p>Attack : @Model.beerUser.Attack</p>
+            <p>Defense : @Model.beerUser.Defense</p>
+            <p>Life : @Model.beerUser.Life</p>
             <p>Weapon in use : @Model.userWeaponInUse.Weapon.Name</p>
         </div>
     </div>
     <div class="row">
-
+        <h3>Enemies</h3>
+        <div>
+            <button onclick="location.href='@Url.Action("ChangePageLeft", "BeerWar")?selectedPage=@Model.SelectedPage&search=@Model.Search'" style="padding:5px;"><</button>
+            <button onclick="location.href='@Url.Action("ChangePageRight", "BeerWar")?selectedPage=@Model.SelectedPage&search=@Model.Search'" style="padding:5px;">></button>
+            <p>Page @Model.SelectedPage / @Model.NumberOfPages</p>
+            <p>
+                @using (Html.BeginForm("Search", "BeerWar", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.HiddenFor(m => m.SelectedPage, Model.SelectedPage)
+                    @Html.TextBoxFor(m => m.Search, new { @class = "form-control" })
+                    <input type="submit" class="btn btn-default" value="Search" />
+                }
+            </p>
+        </div>
+        @foreach (var u in Model.beerUsersPage)
+        {
+            <div class="col-md-4" style="border-style:solid">
+                <p>@u.Pseudonym</p>
+                <p>Level : @u.Level</p>
+                <p>Attack : @u.Attack</p>
+                <p>Defense : @u.Defense</p>
+                <p>Life : @u.Life</p>
+                <p><button onclick="location.href='@Url.Action("Fight", "BeerWar")?id=@u.Id'">Fight with this gamer !</button></p>
+            </div>
+        }
     </div>
 </div>

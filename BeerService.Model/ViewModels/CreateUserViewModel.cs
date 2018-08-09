@@ -16,5 +16,6 @@ namespace BeerService.Model.ViewModels
         public string SelectedGamerType { get; set; }
         public List<GamerType> GamerTypes { get; set; }
         public IEnumerable<SelectListItem> SelectListGamerType { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

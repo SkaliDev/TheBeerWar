@@ -23,6 +23,10 @@ namespace BeerService.Model.Models
         private string _pseudonym;
         [Required]
         public string Pseudonym { get { return _pseudonym; } set { _pseudonym = StringLengthSmalerOrEqual(value, 20, "Pseudonym"); } }
+        public int Attack { get; set; }
+        public int Defense { get; set; }
+        public int Life { get; set; }
+        public int MaxExperience { get; set; }
 
         public BeerUser()
         {

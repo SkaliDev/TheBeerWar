@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data.Entity;
 
 namespace BeerService.Infrastructure
 {
@@ -30,7 +31,10 @@ namespace BeerService.Infrastructure
             beerUser.Pseudonym = pseudonym;
             beerUser.Level = 1;
             beerUser.Experience = 0;
-            beerUser.Money = 50;
+            beerUser.Money = 10;
+            beerUser.Attack = gamerType.Attack;
+            beerUser.Defense = gamerType.Defense;
+            beerUser.Life = gamerType.Defense;
             _context.BeerUsers.Add(beerUser);
             if (_context.SaveChanges() == 0)
                 throw new BeerException("An error occured when creating BeerUser.");
@@ -114,11 +118,11 @@ namespace BeerService.Infrastructure
         }
         public UserWeapon GetUserWeaponInUse(BeerUser beerUser)
         {
-            return _context.UserWeapons.FirstOrDefault(w => w.User.Id == beerUser.Id && w.InUse == true);
+            return _context.UserWeapons.Include(w => w.Weapon).FirstOrDefault(w => w.User.Id == beerUser.Id && w.InUse == true);
         }
         public void UpdateUserWeaponInUse(UserWeapon userWeapon)
         {
-            var weapons = _context.UserWeapons.Where(w => w.User == userWeapon.User && w.InUse == true);
+            var weapons = _context.UserWeapons.Where(w => w.User.Id == userWeapon.User.Id && w.InUse == true).ToList();
             foreach (UserWeapon w in weapons)
             {
                 w.InUse = false;

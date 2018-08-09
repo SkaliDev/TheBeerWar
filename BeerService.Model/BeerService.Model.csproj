@@ -62,7 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationModels\UserCharacteristics.cs" />
     <Compile Include="Exceptions\BeerException.cs" />
     <Compile Include="IBeerRepository.cs" />
     <Compile Include="Models\BeerUser.cs" />

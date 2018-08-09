@@ -1,5 +1,6 @@
 ﻿using BeerService.Exceptions;
 using BeerService.Model.ViewModels;
+using BeerService.Service;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,10 @@ using System.Web.Mvc;
 
 namespace TheBeerWar.Controllers
 {
+    [Authorize(Roles = "Gamer")]
     public class ShopController : Controller
     {
-        private readonly BeerService.Service.BeerService _service = new BeerService.Service.BeerService();
+        private readonly IBeerService _service = new BeerService.Service.BeerService();
         private ShopViewModel _model = new ShopViewModel();
 
         [HttpGet]

@@ -9,33 +9,38 @@
     <div class="row">
         <div class="col-md-5" style="border-style: solid;">
             <p>@Model.beerUser.Pseudonym</p>
+            <p>@Model.beerUser.GamerType.Name</p>
             <p>Level : @Model.beerUser.Level</p>
-            <p>Experience : @Model.beerUser.Experience / @Model.userCharacteristics.MaxExperience</p>
+            <p>Experience : @Model.beerUser.Experience / @Model.beerUser.MaxExperience</p>
             <p>Money : @Model.beerUser.Money</p>
         </div>
         <div class="col-md-2">
         </div>
         <div class="col-md-5" style="border-style: solid;">
-            <p>Attack : @Model.userCharacteristics.Attack</p>
-            <p>Defense : @Model.userCharacteristics.Defense</p>
-            <p>Life : @Model.userCharacteristics.Life</p>
+            <p>Attack : @Model.beerUser.Attack</p>
+            <p>Defense : @Model.beerUser.Defense</p>
+            <p>Life : @Model.beerUser.Life</p>
             <p>Weapon in use : @Model.userWeaponInUse.Weapon.Name</p>
         </div>
     </div>
     <hr />
+    <p style="color:green;">@Model.SuccessMessage</p>
+    <p style="color:red;">@Model.ErrorMessage</p>
+    <hr />
     <div class="row">
         <div class="col-md-5">
-            <table>
-                @foreach (var w in Model.userWeapons)
+            @foreach (var w in Model.userWeapons)
+            {
+                if (!w.InUse)
                 {
-                    <tr style="border-style:solid;">
-                        <td>@w.Weapon.Name</td>
-                        <td>@w.Weapon.AttackMore</td>
-                        <td>@Html.CheckBox(w.Weapon.Name, w.InUse)</td>
-                        <td><button onclick="location.href='@Url.Action("SelectWeapon", "Dashboard" )?id=@w.Weapon.Id'">Buy it</button></td>
-                    </tr>
+                    <div style="border-style:solid;">
+                        <p>@w.Weapon.Name</p>
+                        <p>Attack more : @w.Weapon.AttackMore</p>
+                        <p>Minimum level : @w.Weapon.MinimumLevel</p>
+                        <p><button onclick="location.href='@Url.Action("SelectWeapon", "Dashboard" )?id=@w.Id'">Select this weapon</button></p>
+                    </div>
                 }
-            </table>
+            }
         </div>
     </div>
 </div>

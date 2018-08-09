@@ -5,13 +5,16 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+using BeerService.Service;
+using BeerService.Exceptions;
 
 namespace TheBeerWar.Controllers
 {
     [Authorize]
     public class BeerAccountController : Controller
     {
-        private readonly BeerService.Service.BeerService _service = new BeerService.Service.BeerService();
+        private readonly IBeerService _service = new BeerService.Service.BeerService();
+        private CreateUserViewModel _model = new CreateUserViewModel();
         private ApplicationUserManager _userManager;
         private ApplicationUserManager UserManager
         {
@@ -29,14 +32,19 @@ namespace TheBeerWar.Controllers
         public ActionResult CreateUser()
         {
             if (HttpContext.User.IsInRole("Gamer"))
-                return RedirectToAction("Index", "Desktop");
-
-            var model = new CreateUserViewModel();
-            model.GamerTypes = _service.GetAllGamerTypes();
+                return RedirectToAction("Index", "Dashboard");
             
-            model.SelectListGamerType = GetSelectListItems(_service.GetAllGamerTypeNames());
+            try
+            {
+                _model.GamerTypes = _service.GetAllGamerTypes();
+                _model.SelectListGamerType = GetSelectListItems(_service.GetAllGamerTypeNames());
+            }
+            catch (BeerException e)
+            {
+                _model.ErrorMessage = e.Message;
+            }
 
-            return View(model);
+            return View(_model);
         }
 
         [HttpPost]
@@ -45,16 +53,26 @@ namespace TheBeerWar.Controllers
             if (HttpContext.User.IsInRole("Gamer"))
                 return HttpNotFound("Your have already a gamer type.");
 
-            model.GamerTypes = _service.GetAllGamerTypes();
-            model.SelectListGamerType = GetSelectListItems(_service.GetAllGamerTypeNames());
-
-            if (ModelState.IsValid)
+            _model = model;
+            try
             {
-                _service.CreateBeerUser(HttpContext.User.Identity.GetUserId(), _service.GetGamerTypeByName(model.SelectedGamerType), model.Pseudonym);
-                UserManager.AddToRole(HttpContext.User.Identity.GetUserId(), "Gamer");
+                _model.ErrorMessage = null;
+                model.GamerTypes = _service.GetAllGamerTypes();
+                model.SelectListGamerType = GetSelectListItems(_service.GetAllGamerTypeNames());
+
+                if (ModelState.IsValid)
+                {
+                    _service.CreateBeerUser(HttpContext.User.Identity.GetUserId(), _service.GetGamerTypeByName(model.SelectedGamerType), model.Pseudonym);
+                    UserManager.AddToRole(HttpContext.User.Identity.GetUserId(), "Gamer");
+                }
+            }
+            catch (BeerException e)
+            {
+                _model.ErrorMessage = e.Message;
+                return RedirectToAction("CreateUser", "BeerAccount");
             }
 
-            return RedirectToAction("Index", "Desktop");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)
