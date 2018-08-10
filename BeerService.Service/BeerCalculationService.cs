@@ -1,5 +1,6 @@
 ﻿using BeerService.Model.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace BeerService.Service
 {
     public static class BeerCalculationService
     {
+        private static Random _rnd = new Random();
+
         /// <summary>
         /// Calcul of Attack, Defense, Life and MaxExperience of a user.
         /// </summary>
@@ -45,7 +48,7 @@ namespace BeerService.Service
 
             if (beerUser.Experience >= beerUser.MaxExperience && beerUser.Level < 50)
             {
-                beerUser.Level ++;
+                beerUser.Level++;
                 beerUser.Experience = 0;
             }
 
@@ -61,32 +64,38 @@ namespace BeerService.Service
         /// <returns></returns>
         public static bool Fight(BeerUser beerUser, BeerUser beerUserEnemy)
         {
-            bool rep = false;
+            bool result = false;
             bool turn = true; // True == beerUser && False == beerUserEnemy
+            int beerUserLife = beerUser.Life;
+            int beerUserEnemyLife = beerUserEnemy.Life;
 
             do
             {
-                
-            } while (beerUser.Life > 0 || beerUserEnemy.Life > 0);
+                if (randomBool())
+                {
+                    if (turn)
+                        beerUserEnemyLife -= beerUser.Attack - (int)(beerUserEnemy.Defense * 0.8);
+                    else
+                        beerUserLife -= beerUserEnemy.Attack - (int)(beerUser.Defense * 0.8);
+                }
 
-            if (beerUser.Life <= 0)
-                rep = false;
+                turn = !turn;
+            } while (beerUserLife > 0 && beerUserEnemyLife > 0);
+
+            if (beerUserLife <= 0) // beerUser lost
+                result = false;
             else
-                rep = true;
+                result = true;
 
-            return rep;
+            return result;
         }
-        private bool randomBool()
+        private static bool randomBool()
         {
-            Boolean boolValue = (UnityEngine.Random.Range(0, 2) == 0);
-            if (boolValue == true)
-            {
+            int i = _rnd.Next(1, 101);
+            if (i > 51)
                 return true;
-            }
             else
-            {
                 return false;
-            }
         }
     }
 }
