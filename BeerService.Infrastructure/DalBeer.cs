@@ -55,12 +55,14 @@ namespace BeerService.Infrastructure
         {
             return _context.BeerUsers.ToList();
         }
-        public void UpdateBeerUser(BeerUser beerUser)
+        public BeerUser UpdateBeerUser(BeerUser beerUser)
         {
             var user = _context.BeerUsers.FirstOrDefault(u => u.Id == beerUser.Id);
             user = beerUser;
-            if (_context.SaveChanges() == 0)
+            if (_context.SaveChanges() < 0)
                 throw new BeerException("An error occured when updating BeerUser.");
+            else
+                return beerUser;
         }
         public void DeleteBeerUser(BeerUser beerUser)
         {

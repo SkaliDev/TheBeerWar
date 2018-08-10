@@ -18,6 +18,19 @@
             <p>Life : @Model.beerUser.Life</p>
             <p>Weapon in use : @Model.userWeaponInUse.Weapon.Name</p>
         </div>
+        @if (Model.ResultFight != null && Model.ResultFight != "")
+        {
+        <div class="col-md-4" style="border-style:solid;">
+            <p>Results of the fight vs @Model.beerUserEnemy.Pseudonym</p>
+            <p>Level : @Model.beerUserEnemy.Level</p>
+            <hr />
+            <p>Attack : @Model.beerUserEnemy.Attack</p>
+            <p>Defense : @Model.beerUserEnemy.Defense</p>
+            <p>Life : @Model.beerUserEnemy.Life</p>
+            <hr />
+            <p>Result : @Model.ResultFight</p>
+        </div>
+        }
     </div>
     <div class="row">
         <h3>Enemies</h3>
@@ -38,6 +51,7 @@
         {
             <div class="col-md-4" style="border-style:solid">
                 <p>@u.Pseudonym</p>
+                <p>@u.GamerType.Name</p>
                 <p>Level : @u.Level</p>
                 <p>Attack : @u.Attack</p>
                 <p>Defense : @u.Defense</p>

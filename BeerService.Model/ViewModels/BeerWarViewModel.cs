@@ -10,6 +10,7 @@ namespace BeerService.Model.ViewModels
     public class BeerWarViewModel
     {
         public BeerUser beerUser { get; set; }
+        public BeerUser beerUserEnemy { get; set; }
         public UserWeapon userWeaponInUse { get; set; }
         public List<BeerUser> beerUsers { get; set; }
         public List<BeerUser> beerUsersPage { get; private set; }

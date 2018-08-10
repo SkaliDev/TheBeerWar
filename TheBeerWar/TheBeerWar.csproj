@@ -34,6 +34,24 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DefaultConnection-Deployment" Order="1" Enabled="True">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=192.168.0.49%3bInitial Catalog=DEV_TheBeerWar%3bUser Id=Skali%3bPassword=mDpSQl8664.top%3bIntegrated Security=False%3bMultipleActiveResultSets=True%3bApplication Name=EntityFrameworkMUE" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="BeerDBContex-Deployment" Order="2" Enabled="True">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=192.168.0.49%3bInitial Catalog=DEV_TheBeerWar%3bUser Id=Skali%3bPassword=mDpSQl8664.top%3bIntegrated Security=False%3bMultipleActiveResultSets=True%3bApplication Name=EntityFrameworkMUE" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\BeerDBContex-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +61,24 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DefaultConnection-Deployment" Order="1">
+          <Destination Path="Data Source=192.168.0.49%3bInitial Catalog=QA_TheBeerWar%3bIntegrated Security=False%3bUser ID=Skali%3bPassword=mDpSQl8664.top%3bApplication Name=EntityFrameworkMUE" />
+          <Object Type="DbFullSql" Enabled="False">
+            <PreSource Path="Data Source=192.168.0.49%3bInitial Catalog=QA_TheBeerWar%3bIntegrated Security=False%3bUser ID=Skali%3bPassword=mDpSQl8664.top%3bApplication Name=EntityFrameworkMUE" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="BeerDBContex-Deployment" Order="2">
+          <Destination Path="Data Source=192.168.0.49%3bInitial Catalog=QA_TheBeerWar%3bIntegrated Security=False%3bUser ID=Skali%3bPassword=mDpSQl8664.top%3bApplication Name=EntityFrameworkMUE" />
+          <Object Type="DbFullSql" Enabled="False">
+            <PreSource Path="Data Source=192.168.0.49%3bInitial Catalog=QA_TheBeerWar%3bIntegrated Security=False%3bUser ID=Skali%3bPassword=mDpSQl8664.top%3bApplication Name=EntityFrameworkMUE" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\BeerDBContex-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -225,7 +261,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\PersoVMProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\PersoVMFileProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\PersoVMWebPublishProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

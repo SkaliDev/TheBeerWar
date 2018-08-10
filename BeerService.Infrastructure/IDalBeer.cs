@@ -13,7 +13,7 @@ namespace BeerService.Infrastructure
         BeerUser GetBeerUserByPseudonym(string pseudo);
         BeerUser GetBeerUserByClientId(string clientId);
         List<BeerUser> GetAllBeerUsers();
-        void UpdateBeerUser(BeerUser beerUser);
+        BeerUser UpdateBeerUser(BeerUser beerUser);
         void DeleteBeerUser(BeerUser beerUser);
         
         GamerType GetGamerTypeById(int gamerTypeId);

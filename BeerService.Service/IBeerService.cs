@@ -10,7 +10,7 @@ namespace BeerService.Service
     public interface IBeerService
     {
         void CreateBeerUser(string clientId, GamerType gamerType, string pseudonym);
-        BeerUser GetUserById(int id);
+        BeerUser GetBeerUserById(int id);
         BeerUser GetBeerUserByClientId(string clientId);
         List<BeerUser> GetAllBeerUsers();
         void UpdateBeerUserInformations(BeerUser beerUser);
@@ -24,9 +24,8 @@ namespace BeerService.Service
         /// 
         /// </summary>
         /// <param name="beerUser"></param>
-        /// <param name="weapon"></param>
-        /// <param name="experience">The weapon of the user.</param>
-        void UpdateBeerUserAddExperience(BeerUser beerUser, Weapon weapon, int experience);
+        /// <param name="weapon">The weapon of the user.</param>
+        BeerUser UpdateBeerUserAddExperienceAndMoney(BeerUser beerUser, Weapon weapon);
         List<BeerUser> RemoveBeerUserFromBeerUsersList(BeerUser beerUser, List<BeerUser> beerUsers);
 
         GamerType GetGamerTypeByName(string gamerTypeName);

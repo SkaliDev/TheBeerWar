@@ -1,4 +1,5 @@
-﻿using BeerService.Model.ViewModels;
+﻿using BeerService.Exceptions;
+using BeerService.Model.ViewModels;
 using BeerService.Service;
 using Microsoft.AspNet.Identity;
 using System;
@@ -74,6 +75,25 @@ namespace TheBeerWar.Controllers
         [HttpGet]
         public ActionResult Fight(int id)
         {
+            LoadModel();
+            _service.UpdateBeerUserInformations(_model.beerUser);
+            _model.beerUserEnemy = _service.GetBeerUserById(id);
+            if (BeerCalculationService.Fight(_model.beerUser, _model.beerUserEnemy))
+            {
+                try
+                {
+                    _model.beerUser = _service.UpdateBeerUserAddExperienceAndMoney(_model.beerUser, _model.userWeaponInUse.Weapon);
+                    _model.ResultFight = "Felicitations, you won it ! You earn 10 money !";
+                }
+                catch (BeerException e)
+                {
+                    _model.ErrorMessage = e.Message;
+                    return View("Index", _model);
+                }
+            }
+            else
+                _model.ResultFight = "Sorry you loose !!!";
+
             return View("Index", _model);
         }
 
@@ -90,10 +110,10 @@ namespace TheBeerWar.Controllers
         {
             _model.beerUser = _service.GetBeerUserByClientId(HttpContext.User.Identity.GetUserId());
             _model.userWeaponInUse = _service.GetUserWeaponInUse(_model.beerUser);
-            _model.beerUser = BeerCalculationService.CharacteristicsCalculation(_model.beerUser, _model.userWeaponInUse.Weapon);
             _model.beerUsers = _service.RemoveBeerUserFromBeerUsersList(_model.beerUser, _service.GetAllBeerUsers());
             _model.Pagination();
             _model.Search = null;
+            _model.ResultFight = null;
         }
     }
 }

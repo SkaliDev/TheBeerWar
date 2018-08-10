@@ -25,7 +25,7 @@ namespace BeerService.Service
             var weapon = _context.GetWeaponByAttackMore(gamerType.WeaponType, 2);
             _context.AddUserWeapon(new UserWeapon(beerUser, weapon, true));
         }
-        public BeerUser GetUserById(int id)
+        public BeerUser GetBeerUserById(int id)
         {
             return _context.GetBeerUserById(id);
         }
@@ -35,6 +35,13 @@ namespace BeerService.Service
         }
         public List<BeerUser> GetAllBeerUsers()
         {
+            // Update characteristics of all gamers.
+            var beerUsers = _context.GetAllBeerUsers();
+            foreach (var u in beerUsers)
+            {
+                UpdateBeerUserInformations(BeerCalculationService.CharacteristicsCalculation(u, GetUserWeaponInUse(u).Weapon));
+            }
+
             return _context.GetAllBeerUsers();
         }
         public void UpdateBeerUserInformations(BeerUser beerUser)
@@ -46,10 +53,11 @@ namespace BeerService.Service
             BeerCalculationService.CharacteristicsCalculation(beerUser, weapon);
             _context.UpdateBeerUser(beerUser);
         }
-        public void UpdateBeerUserAddExperience(BeerUser beerUser, Weapon weapon, int experience)
+        public BeerUser UpdateBeerUserAddExperienceAndMoney(BeerUser beerUser, Weapon weapon)
         {
-            BeerCalculationService.AddExperience(beerUser, weapon, experience);
-            _context.UpdateBeerUser(beerUser);
+            BeerCalculationService.AddExperience(beerUser, weapon);
+            beerUser.Money += 10;
+            return _context.UpdateBeerUser(beerUser);
         }
         public List<BeerUser> RemoveBeerUserFromBeerUsersList(BeerUser beerUser, List<BeerUser> beerUsers)
         {
@@ -145,6 +153,7 @@ namespace BeerService.Service
             if (userWeapon.Weapon.MinimumLevel > userWeapon.User.Level)
                 throw new BeerException("You do not have the enough level yet !");
             _context.UpdateUserWeaponInUse(userWeapon);
+            UpdateBeerUserInformations(BeerCalculationService.CharacteristicsCalculation(userWeapon.User, userWeapon.Weapon));
         }
         public void UpdateUserWeaponInUse(int userWeaponId)
         {
@@ -152,6 +161,7 @@ namespace BeerService.Service
             if (userWeapon == null)
                 throw new BeerException("Can't find the weapon !");
             UpdateUserWeaponInUse(userWeapon);
+            UpdateBeerUserInformations(BeerCalculationService.CharacteristicsCalculation(userWeapon.User, userWeapon.Weapon));
         }
     }
 }
