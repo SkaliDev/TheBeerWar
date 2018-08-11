@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using BeerService.Service;
 using BeerService.Exceptions;
+using System.Globalization;
 
 namespace TheBeerWar.Controllers
 {
@@ -54,22 +55,25 @@ namespace TheBeerWar.Controllers
                 return HttpNotFound("Your have already a gamer type.");
 
             _model = model;
+
+            _model.BeerUser.ClientId = HttpContext.User.Identity.GetUserId();
+            ModelState.Remove("BeerUser.ClientId");
+            if (!ModelState.IsValid)
+                return View("CreateUser", _model);
+            
             try
             {
                 _model.ErrorMessage = null;
-                model.GamerTypes = _service.GetAllGamerTypes();
-                model.SelectListGamerType = GetSelectListItems(_service.GetAllGamerTypeNames());
-
-                if (ModelState.IsValid)
-                {
-                    _service.CreateBeerUser(HttpContext.User.Identity.GetUserId(), _service.GetGamerTypeByName(model.SelectedGamerType), model.Pseudonym);
-                    UserManager.AddToRole(HttpContext.User.Identity.GetUserId(), "Gamer");
-                }
+                _model.GamerTypes = _service.GetAllGamerTypes();
+                _model.SelectListGamerType = GetSelectListItems(_service.GetAllGamerTypeNames());
+                
+                _service.CreateBeerUser(_model.BeerUser.ClientId, _service.GetGamerTypeByName(model.SelectedGamerType), _model.BeerUser.Pseudonym);
+                UserManager.AddToRole(HttpContext.User.Identity.GetUserId(), "Gamer");
             }
             catch (BeerException e)
             {
                 _model.ErrorMessage = e.Message;
-                return RedirectToAction("CreateUser", "BeerAccount");
+                return View("CreateUser", _model);
             }
 
             return RedirectToAction("Index", "Dashboard");

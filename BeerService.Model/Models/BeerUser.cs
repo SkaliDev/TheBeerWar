@@ -20,9 +20,9 @@ namespace BeerService.Model.Models
         public int Experience { get; set; }
         [Required]
         public int Money { get; set; }
-        private string _pseudonym;
-        [Required]
-        public string Pseudonym { get { return _pseudonym; } set { _pseudonym = StringLengthSmalerOrEqual(value, 20, "Pseudonym"); } }
+        [Required(ErrorMessage = "The pseudonym is required.")]
+        [RegularExpression(@"^[a-zA-Z0-9]{5,20}$", ErrorMessage = "The pseudonym must have between 5 and 20 characters (a-zA-Z0-9).")]
+        public string Pseudonym { get; set; }
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Life { get; set; }
@@ -30,18 +30,6 @@ namespace BeerService.Model.Models
 
         public BeerUser()
         {
-        }
-
-        private string StringLengthSmalerOrEqual(string str, int max, string variableName)
-        {
-            if (str.Length <= max)
-            {
-                return str;
-            }
-            else
-            {
-                throw new BeerException("Too much characters in the string '" + variableName + "'. Maximum " + max.ToString() + " characters.");
-            }
         }
     }
 }
