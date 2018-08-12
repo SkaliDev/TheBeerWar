@@ -112,11 +112,11 @@ namespace BeerService.Infrastructure
         }
         public UserWeapon GetUserWeaponById(int userWeaponId)
         {
-            return _context.UserWeapons.FirstOrDefault(w => w.Id == userWeaponId);
+            return _context.UserWeapons.Include(w => w.Weapon).FirstOrDefault(w => w.Id == userWeaponId);
         }
         public List<UserWeapon> GetUserWeapons(BeerUser beerUser)
         {
-            return _context.UserWeapons.Where(w => w.User.Id == beerUser.Id).ToList();
+            return _context.UserWeapons.Where(w => w.User.Id == beerUser.Id).OrderBy(w => w.Weapon.MinimumLevel).ToList();
         }
         public UserWeapon GetUserWeaponInUse(BeerUser beerUser)
         {
@@ -133,6 +133,14 @@ namespace BeerService.Infrastructure
             var weapon = _context.UserWeapons.Where(w => w == userWeapon);
             if (_context.SaveChanges() == 0)
                 throw new BeerException("An error occured when updating UserWeapon in use.");
+        }
+        public void DeleteUserWeapon(UserWeapon userWeapon)
+        {
+            if (userWeapon.InUse == true)
+                throw new BeerException("You can't delete a weapon that is in use !");
+            _context.UserWeapons.Remove(userWeapon);
+            if (_context.SaveChanges() == 0)
+                throw new BeerException("An error occured when deleting UserWeapon.");
         }
 
         public void Dispose()

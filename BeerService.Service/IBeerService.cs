@@ -37,12 +37,14 @@ namespace BeerService.Service
         List<Weapon> GetWeaponsByWeaponTypeWithoutWeaponsBoughtByUser(WeaponType weaponType, List<Weapon> userWeapons);
 
         void AddUserWeapon(UserWeapon userWeapon);
-        UserWeapon GetUserWeaponById(int userWeaponId);
         void BuyWeapon(BeerUser beerUser, int weaponId);
+        UserWeapon GetUserWeaponById(int userWeaponId);
         List<UserWeapon> GetUserWeapons(BeerUser beerUser);
         UserWeapon GetUserWeaponInUse(BeerUser beerUser);
         List<Weapon> GetUserWeaponsAsListOfWeapon(BeerUser beerUser);
         void UpdateUserWeaponInUse(UserWeapon userWeapon);
         void UpdateUserWeaponInUse(int userWeaponId);
+        void DeleteUserWeapon(UserWeapon userWeapon);
+        void SailWeapon(BeerUser beerUser, int userWeaponId);
     }
 }

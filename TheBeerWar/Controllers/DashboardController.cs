@@ -39,6 +39,25 @@ namespace TheBeerWar.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult SailWeapon(int id)
+        {
+            LoadModel();
+            try
+            {
+                _service.SailWeapon(_model.beerUser, id);
+                LoadModel();
+                _model.SuccessMessage = "The weapon is sailed !";
+                _model.ErrorMessage = null;
+            }
+            catch (BeerException e)
+            {
+                _model.SuccessMessage = null;
+                _model.ErrorMessage = e.Message;
+            }
+            return View("Index", _model);
+        }
+
         private void LoadModel()
         {
             _model.beerUser = _service.GetBeerUserByClientId(HttpContext.User.Identity.GetUserId());

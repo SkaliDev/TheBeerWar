@@ -39,5 +39,6 @@ namespace BeerService.Infrastructure
         /// </summary>
         /// <param name="userWeapon"></param>
         void UpdateUserWeaponInUse(UserWeapon userWeapon);
+        void DeleteUserWeapon(UserWeapon userWeapon);
     }
 }

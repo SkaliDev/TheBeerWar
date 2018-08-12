@@ -102,18 +102,20 @@ namespace BeerService.Service
         {
             _context.AddUserWeapon(userWeapon);
         }
-        public UserWeapon GetUserWeaponById(int userWeaponId)
-        {
-            return _context.GetUserWeaponById(userWeaponId);
-        }
         public void BuyWeapon(BeerUser beerUser, int weaponId)
         {
             var weapon = GetWeaponById(weaponId);
             if (beerUser.Money < weapon.Cost)
                 throw new BeerException("You doesn't have enought money !");
+            if (weapon == null)
+                throw new BeerException("Weapon not found !");
             AddUserWeapon(new UserWeapon(beerUser, weapon, false));
             beerUser.Money -= weapon.Cost;
             UpdateBeerUserInformations(beerUser);
+        }
+        public UserWeapon GetUserWeaponById(int userWeaponId)
+        {
+            return _context.GetUserWeaponById(userWeaponId);
         }
         public List<UserWeapon> GetUserWeapons(BeerUser beerUser)
         {
@@ -162,6 +164,21 @@ namespace BeerService.Service
                 throw new BeerException("Can't find the weapon !");
             UpdateUserWeaponInUse(userWeapon);
             UpdateBeerUserInformations(BeerCalculationService.CharacteristicsCalculation(userWeapon.User, userWeapon.Weapon));
+        }
+        public void DeleteUserWeapon(UserWeapon userWeapon)
+        {
+            _context.DeleteUserWeapon(userWeapon);
+        }
+        public void SailWeapon(BeerUser beerUser, int userWeaponId)
+        {
+            var userWeapon = GetUserWeaponById(userWeaponId);
+            beerUser.Money += (userWeapon.Weapon.Cost / 2);
+            UpdateBeerUserInformations(beerUser);
+            if (userWeapon == null)
+                throw new BeerException("Weapon not found !");
+            if (userWeapon.InUse == true)
+                throw new BeerException("You can't sail a weapon that is in use !");
+            DeleteUserWeapon(userWeapon);
         }
     }
 }

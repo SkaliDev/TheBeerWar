@@ -20,7 +20,7 @@
             <p>Attack : @Model.beerUser.Attack</p>
             <p>Defense : @Model.beerUser.Defense</p>
             <p>Life : @Model.beerUser.Life</p>
-            <p>Weapon in use : @Model.userWeaponInUse.Weapon.Name</p>
+            <p>Weapon in use : @Model.userWeaponInUse.Weapon.Name (Attack more : @Model.userWeaponInUse.Weapon.AttackMore)</p>
         </div>
     </div>
     <hr />
@@ -38,6 +38,16 @@
                         <p>Attack more : @w.Weapon.AttackMore</p>
                         <p>Minimum level : @w.Weapon.MinimumLevel</p>
                         <p><button onclick="location.href='@Url.Action("SelectWeapon", "Dashboard" )?id=@w.Id'">Select this weapon</button></p>
+                        <p><button onclick="location.href='@Url.Action("SailWeapon", "Dashboard", new { id = @w.Id })'">Sail it</button></p>
+                    </div>
+                }
+                else
+                {
+                    <div style="border-style:solid;">
+                        <p>@w.Weapon.Name</p>
+                        <p>Attack more : @w.Weapon.AttackMore</p>
+                        <p>Minimum level : @w.Weapon.MinimumLevel</p>
+                        <p>In use</p>
                     </div>
                 }
             }
