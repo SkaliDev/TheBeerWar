@@ -20,9 +20,9 @@ namespace BeerService.Service
         /// <returns></returns>
         public static BeerUser CharacteristicsCalculation(BeerUser beerUser, Weapon weapon)
         {
-            beerUser.Attack = (int)(beerUser.GamerType.Attack + (beerUser.GamerType.Attack / 11) + weapon.AttackMore + (beerUser.GamerType.Attack * 1.3));
-            beerUser.Defense = (int)(beerUser.GamerType.Defense + (beerUser.GamerType.Defense / 9.60) + (beerUser.GamerType.Defense * 1.3));
-            beerUser.Life = (int)(beerUser.GamerType.Life + (beerUser.GamerType.Life / 10) + (beerUser.GamerType.Life * 1.3));
+            beerUser.Attack = (int)(beerUser.GamerType.Attack + (beerUser.GamerType.Attack / 11) + weapon.AttackMore + ((beerUser.GamerType.Attack + (beerUser.Level * 3.5)) * 1.3));
+            beerUser.Defense = (int)(beerUser.GamerType.Defense + (beerUser.GamerType.Defense / 9.60) + ((beerUser.GamerType.Defense + (beerUser.Level * 3.5)) * 1.3));
+            beerUser.Life = (int)(beerUser.GamerType.Life + (beerUser.GamerType.Life / 10) + ((beerUser.GamerType.Life + (beerUser.Level * 3.5)) * 1.3));
             if (beerUser.Level >= 50)
                 beerUser.MaxExperience = 0;
             else
