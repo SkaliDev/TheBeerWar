@@ -11,8 +11,8 @@ namespace BeerService.Model.ViewModels
 {
     public class CreateUserViewModel
     {
-        public string Pseudonym { get; set; }
-        [Required]
+        public BeerUser BeerUser { get; set; }
+        [Required(ErrorMessage = "The selectedGamerType is required.")]
         public string SelectedGamerType { get; set; }
         public List<GamerType> GamerTypes { get; set; }
         public IEnumerable<SelectListItem> SelectListGamerType { get; set; }
