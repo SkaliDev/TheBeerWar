@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using BeerService.Infrastructure;
 using BeerService.Model.Models;
 
-namespace TestTest
+namespace BeerUserTest
 {
     [TestClass]
     public class BeerUserTest
@@ -25,13 +25,13 @@ namespace TestTest
                     dal.DeleteBeerUser(beerUser);
 
                 dal.CreateBeerUser("0", dal.GetGamerTypeByName("Archer"), "TheFirstUser");
-                dal.CreateBeerUser("0", dal.GetGamerTypeByName("Sorcier"), "TheSeconfUser");
+                dal.CreateBeerUser("0", dal.GetGamerTypeByName("Sorcier"), "TheSecondUser");
 
                 List<BeerUser> users = dal.GetAllBeerUsers();
 
                 Assert.IsNotNull(users);
                 Assert.AreEqual("TheFirstUser", dal.GetBeerUserByPseudonym("TheFirstUser").Pseudonym);
-                Assert.AreEqual("TheSeconfUser", dal.GetBeerUserByPseudonym("TheSecondUser").Pseudonym);
+                Assert.AreEqual("TheSecondUser", dal.GetBeerUserByPseudonym("TheSecondUser").Pseudonym);
 
                 dal.DeleteBeerUser(dal.GetBeerUserByPseudonym("TheFirstUser"));
                 dal.DeleteBeerUser(dal.GetBeerUserByPseudonym("TheSecondUser"));

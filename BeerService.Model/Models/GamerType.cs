@@ -19,9 +19,5 @@ namespace BeerService.Model.Models
         [Required]
         public int Life { get; set; }
         public virtual WeaponType WeaponType { get; set; }
-
-        public GamerType()
-        {
-        }
     }
 }

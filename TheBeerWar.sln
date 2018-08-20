@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheBeerWar", "TheBeerWar\TheBeerWar.csproj", "{17C1BB24-97B3-4320-A260-027BF2EFFEC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTest", "TestTest\TestTest.csproj", "{D9477094-577C-4637-B0F4-3BB9E39A5587}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerUserTest", "TestTest\BeerUserTest.csproj", "{D9477094-577C-4637-B0F4-3BB9E39A5587}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerService.Infrastructure", "BeerService.Infrastructure\BeerService.Infrastructure.csproj", "{686F66A8-DD9C-435B-BBE7-37501D366061}"
 EndProject
