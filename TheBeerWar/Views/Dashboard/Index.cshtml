@@ -35,6 +35,15 @@
                     <input type="submit" value="Send" />
                 }
             </div>
+            @using (Ajax.BeginForm("GetChatMessages", new AjaxOptions()
+            {
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.InsertAfter,
+                UpdateTargetId = "message"
+            }))
+            {
+                <input type="submit" value="Refresh" />
+            }
         </div>
     </div>
     <hr />

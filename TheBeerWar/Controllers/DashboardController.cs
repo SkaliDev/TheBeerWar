@@ -78,34 +78,7 @@ namespace TheBeerWar.Controllers
                     Time = DateTime.Now
                 };
                 _chatService.AddMessage(chat);
-                // chatsTmp will take all elements of Session when this will have some more elements
-                //List<Chat> chatsTmp = (List<Chat>)Session["ChatMessages"];
-                // So solution :
-                List<Chat> chatsTmp = new List<Chat>();
-                foreach (var cc in (List<Chat>)Session["ChatMessages"])
-                {
-                    chatsTmp.Add(cc);
-                }
-                List<Chat> chatsTmp2 = new List<Chat>();
-                foreach (var c in _chatService.GetMessages((List<Chat>)Session["ChatMessages"]))
-                {
-                    chatsTmp2.Add(c);
-                }
-                Session["ChatMessages"] = null;
-                var i = Session["ChatMessages"];
-                foreach (var cc in chatsTmp2)
-                {
-                    if (chatsTmp.Contains(cc))
-                    {
-                        chatsTmp.First(c => c.Id == cc.Id).ToPrint = false;
-                    }
-                    else
-                    {
-                        cc.ToPrint = true;
-                        chatsTmp.Add(cc);
-                    }
-                }
-                Session["ChatMessages"] = chatsTmp2;
+                GetChatMessagesInSession();
                 return PartialView("Chat", new ChatViewModel(Session["ChatMessages"] as List<Chat>));
             }
             catch (Exception ex)
@@ -116,6 +89,44 @@ namespace TheBeerWar.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult GetChatMessages()
+        {
+            GetChatMessagesInSession();
+            return PartialView("Chat", new ChatViewModel(Session["ChatMessages"] as List<Chat>));
+        }
+
+        private void GetChatMessagesInSession()
+        {
+            // chatsTmp will take all elements of Session when this will have some more elements
+            //List<Chat> chatsTmp = (List<Chat>)Session["ChatMessages"];
+            // So the solution :
+            List<Chat> chatsTmp = new List<Chat>();
+            foreach (var cc in (List<Chat>)Session["ChatMessages"])
+            {
+                chatsTmp.Add(cc);
+            }
+            List<Chat> chatsTmp2 = new List<Chat>();
+            foreach (var c in _chatService.GetMessages((List<Chat>)Session["ChatMessages"]))
+            {
+                chatsTmp2.Add(c);
+            }
+            Session["ChatMessages"] = null;
+            var i = Session["ChatMessages"];
+            foreach (var cc in chatsTmp2)
+            {
+                if (chatsTmp.Contains(cc))
+                {
+                    chatsTmp.First(c => c.Id == cc.Id).ToPrint = false;
+                }
+                else
+                {
+                    cc.ToPrint = true;
+                    chatsTmp.Add(cc);
+                }
+            }
+            Session["ChatMessages"] = chatsTmp2;
+        }
         private void LoadModel()
         {
             _model.beerUser = _service.GetBeerUserByClientId(HttpContext.User.Identity.GetUserId());
