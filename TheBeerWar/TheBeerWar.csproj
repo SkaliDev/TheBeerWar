@@ -269,6 +269,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -310,6 +312,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\BeerWar\Index.cshtml" />
+    <Content Include="Views\Dashboard\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -335,6 +338,14 @@
     <ProjectReference Include="..\BeerService.Service\BeerService.Service.csproj">
       <Project>{3D7B5A2A-1F68-4C77-8860-69180CE59D87}</Project>
       <Name>BeerService.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChatService.Model\ChatService.Model.csproj">
+      <Project>{28AB6D33-73EB-40DE-B82E-09F36CD8733C}</Project>
+      <Name>ChatService.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChatService.Service\ChatService.Service.csproj">
+      <Project>{70f3b97c-3c10-428d-9466-fab92fa1a031}</Project>
+      <Name>ChatService.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

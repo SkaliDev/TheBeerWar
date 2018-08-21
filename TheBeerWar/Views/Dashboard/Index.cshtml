@@ -13,14 +13,28 @@
             <p>Level : @Model.beerUser.Level</p>
             <p>Experience : @Model.beerUser.Experience / @Model.beerUser.MaxExperience</p>
             <p>Money : @Model.beerUser.Money</p>
-        </div>
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-5" style="border-style: solid;">
+            <hr />
             <p>Attack : @Model.beerUser.Attack</p>
             <p>Defense : @Model.beerUser.Defense</p>
             <p>Life : @Model.beerUser.Life</p>
             <p>Weapon in use : @Model.userWeaponInUse.Weapon.Name (Attack more : @Model.userWeaponInUse.Weapon.AttackMore)</p>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-5" style="border-style: solid;">
+            <div style="height:300px;overflow:hidden;overflow-y:auto;">
+                <div id="message"></div>
+                @using (Ajax.BeginForm("Chat", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.InsertAfter,
+                    UpdateTargetId = "message"
+                }))
+                {
+                    @Html.TextBox("chatMessage")
+                    <input type="submit" value="Send" />
+                }
+            </div>
         </div>
     </div>
     <hr />
@@ -53,4 +67,11 @@
             }
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-5">
+            
+        </div>
+        <div class="col-md-5">
+            
+        </div>
 </div>

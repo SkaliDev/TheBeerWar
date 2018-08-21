@@ -1,0 +1,9 @@
+﻿@model ChatService.Model.ChatViewModel
+
+@foreach (var c in Model.ChatMessages)
+{
+    if (c.ToPrint)
+    {
+        <p>@c.UserName - @c.Message</p>
+    }
+}
